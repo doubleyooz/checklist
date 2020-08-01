@@ -1,23 +1,39 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Puzzle Lights</title>
+    <title>Toodo</title>
     <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
+
+    <div class="content">
+        <div class="form-popup">
+            <div class='form-header'>                
+                <span>Create a new task</span>
+                <img src="./assets/close-icon.png" alt="" onclick="CancelPopup()">
+            </div>
+           
+            <div class='task-title'>
+                <span> Title: </span>
+                <input type="text" placeholder="Your task" name="task" required>
+            </div>
+           
+            <button type="submit" class="btn" onclick="createRow()">Create</button>
+            
+        </div>
+    
+        <div class="table">
+            <div class="header">
+                <div class='title'>To-do list</div>
+                <img src="./assets/add-icon.png" alt="" onclick="DisplayPopup()">
+            </div>
+            <div class="rows">
+    
+            </div>            
+    
+        </div>
+    </div>    
    
-
-    <div class="table">
-        <div class="header">
-            <div class='title'>To-do list</div>
-            <img src="./assets/add-icon.png" alt="" onclick="createRow()">
-        </div>
-        <div class="rows">
-
-        </div>
-        
-
-    </div>
 </body>
 <script src='index.js'></script>
 </html>
