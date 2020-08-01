@@ -1,0 +1,108 @@
+.table{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center
+}
+
+.table .header{
+    background-color: #493c6e;
+    width: 400px;
+    height: 35px;
+
+    display: flex;
+    flex-direction: row;    
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    
+
+
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+   
+    
+}
+
+.table .header .title{
+    color: #eeeeee;
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-right: 30px;
+}
+
+.table .header img{
+    width: 25px;
+    height: 25px;
+    
+    position: absolute;
+    right: 10;
+
+
+}
+
+
+
+.table .row{
+    width: 400px;
+    height: 30px;
+    background-color: #9783c9;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    position: relative;
+   
+}
+
+.table .row .button{
+    height: 30px;
+    width: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.table .row .button:hover{
+    background-color: #8d72ba;
+    
+}
+
+
+.table .row img{
+    width: 20px;
+    height: 20px;
+}
+
+.table .row .edit {
+   position: absolute;
+   right: 40;
+
+}
+
+.table .row .trash {
+    position: absolute;
+    right: 0;
+ 
+ }
+
+.table .row img.check{
+    position: absolute;
+    left: 10;
+    display: block;
+
+}
+
+.table .row img.checked{
+    position: absolute;
+    left: 10;
+    display: none;
+
+}
+
+.table .row .task{
+    margin-left: 50px;
+    max-width: 290px;
+}
