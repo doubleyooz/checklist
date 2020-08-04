@@ -10,7 +10,7 @@
         <div class="form-popup">
             <div class='form-header'>                
                 <span>Create a new task</span>
-                <img src="./assets/close-icon.png" alt="" onclick="CancelPopup()">
+                <img src="./assets/close-icon.png" alt="" onclick="CancelPopup('form-popup')">
             </div>
            
             <div class='task-title'>
@@ -25,12 +25,27 @@
         <div class="table">
             <div class="header">
                 <div class='title'>To-do list</div>
-                <img src="./assets/add-icon.png" alt="" onclick="DisplayPopup()">
+                <img src="./assets/add-icon.png" alt="" onclick="DisplayPopup('form-popup', null)">
             </div>
             <div class="rows">
     
             </div>            
     
+        </div>
+
+        <div class="edit-popup">
+            <div class='form-header'>                
+                <span>Update Task</span>
+                <img src="./assets/close-icon.png" alt="" ">
+            </div>
+           
+            <div class='task-title'>
+                <span> New Title: </span>
+                <input type="text" placeholder="Your task" name="task" required>
+            </div>
+           
+            <button type="submit" class="btn">Edit</button>
+            
         </div>
     </div>    
    

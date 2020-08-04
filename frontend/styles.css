@@ -24,7 +24,25 @@ body{
 
 
 }
-.form-popup .form-header{
+.edit-popup{
+    width: 350px;
+    
+    padding: 10px;
+    background-color: #ffffff;
+
+    display: none;
+    top:50%; left: 50%;
+    transform: translate(-50%, -50%);
+
+    position: fixed;    
+    z-index: 300;
+    
+    flex-direction: column;      
+
+
+}
+
+.form-header{
     display: flex;
     flex-direction: row;
     align-content: center;
@@ -34,13 +52,13 @@ body{
     margin-bottom: 20px;
 }
 
-.form-popup .form-header span{
+.form-header span{
     font-size: 26px;
     font-weight: bold;
     
 }
 
-.form-popup .form-header img{
+.form-header img{
     width: 20px;
     height: 20px;
     position: absolute;
@@ -48,7 +66,7 @@ body{
     top: 0;
 }
 
-.form-popup .form-header img:hover{
+.form-header img:hover{
     width: 24px;
     height: 24px;
     right: -2;
@@ -56,7 +74,7 @@ body{
     
 }
 
-.form-popup .task-title{
+.task-title{
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -64,18 +82,18 @@ body{
     
 }
 
-.form-popup .task-title span{
+.task-title span{
     font-weight: bold;
     margin-right: 10px;
     font-size: 20px;
 }
 
-.form-popup .task-title input[type=text]:focus{
+.task-title input[type=text]:focus{
     background-color: #ddd;
     outline: none;
 } 
 
-.form-popup .btn{
+.btn{
     background-color: #4CAF50;
     color: white;
     padding: 16px 20px;
@@ -88,7 +106,7 @@ body{
     font-size: 20px;
 }
 
-.form-popup .btn:hover{
+.btn:hover{
     opacity: 1;
   }
 
@@ -169,6 +187,23 @@ body{
 
 .table .row .button:hover{
     background-color: #8d72ba;
+    
+}
+
+.table .row .button-selected{
+    height: 30px;
+    width: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    
+}
+
+
+.table .row .button-selected:hover{
+    background-color: #db5540;
     
 }
 
