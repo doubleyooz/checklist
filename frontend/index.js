@@ -1,3 +1,8 @@
+let edit_popup = document.getElementsByClassName('edit-popup')[0];
+let create_popup = document.getElementsByClassName('form-popup')[0];
+
+var current_row_edit = '';
+
 function createRow(){
     
     var value = document.getElementsByClassName('task-title')[0]
@@ -16,6 +21,7 @@ function createRow(){
 
     data = JSON.stringify(data)
   
+        
     div.innerHTML = `
         
         <img class="check" src="./assets/circle-icon.png" alt="" onclick="check(${div_id.toString()})">
@@ -84,26 +90,31 @@ function CancelPopup(str){
 }
 
 function EditPopup(id){    
-    let popup = document.getElementsByClassName('edit-popup')[0]
-
-    let input = popup.getElementsByTagName('input')[0];
+    let input = edit_popup.getElementsByTagName('input')[0];
 
     let row = document.getElementById(id);    
     let row_color = row.style.backgroundColor;
+    current_row_edit = id;
     
-    
-    document.getElementsByClassName('form-popup')[0].style.display = "none";
-    popup.style.display = "flex";
-
+    create_popup.style.display = "none";
+    edit_popup.style.display = "flex";
     row.style.backgroundColor = '#f28574'
 
-    
+   
     input.value = row.getElementsByClassName('task')[0].textContent;
 
-    popup.getElementsByClassName('btn')[0].onclick = function (){ UpdateRow(id, input.value) };
+    edit_popup.getElementsByClassName('btn')[0].onclick = function (){     
+        UpdateRow(id, input.value);
+        row.style.backgroundColor = row_color;
+        row.style.transition = "background-color 0.4s"
+        CancelPopup('edit-popup') 
+    };
     
-    popup.getElementsByTagName('img')[0].onclick = function () {
+    //'x' button
+    edit_popup.getElementsByTagName('img')[0].onclick = function () {
         CancelPopup('edit-popup')
+        row.style.backgroundColor = row_color;
+        row.style.transition = "background-color 0.4s"
     }
 
     input.addEventListener('keyup', function(e){
@@ -123,8 +134,12 @@ function EditPopup(id){
 
 function DisplayPopup(str, id){    
     if(str === 'form-popup'){
-        document.getElementsByClassName('form-popup')[0].style.display = "flex";
-        document.getElementsByClassName('edit-popup')[0].style.display = "none";
+        create_popup.style.display = "flex";
+        edit_popup.style.display = "none";
+
+        create_popup.getElementsByTagName('input')[0].value = "";
+
+        
     } else if(str === 'edit-popup'){       
         if(id !== null){
            
