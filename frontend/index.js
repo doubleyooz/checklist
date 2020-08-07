@@ -1,7 +1,7 @@
 let edit_popup = document.getElementsByClassName('edit-popup')[0];
 let create_popup = document.getElementsByClassName('form-popup')[0];
 
-var current_row_edit = '';
+var row_edit = '';
 
 function createRow(){
     
@@ -54,7 +54,12 @@ function UpdateRow(id, text){
 
 function DeleteRow(id){
     var row = document.getElementById(id)
-
+    
+    if(row_edit !== ''){
+        edit_popup.style.display = "none";
+        
+    }
+    row_edit = '';
     document.getElementsByClassName('rows')[0].removeChild(row);
       
 
@@ -70,16 +75,35 @@ function check(id){
     if(check.style.display === "none"){
         check.style.display = "block"
         checked.style.display = "none";
-        row.style.backgroundColor = "#c3aaf0"
-        row.style.transition = "background-color 0.4s"
+        if(row_edit !== id){
+            row.style.backgroundColor = "#c3aaf0"
+            row.style.transition = "background-color 0.4s"
+            
+        }
+       
+      
     }
     else{
         check.style.display = "none"
         checked.style.display = "block";
-        row.style.backgroundColor = "#9783c9"
-        row.style.transition = "background-color 0.4s"
+       
+        if(row_edit !== id){
+            row.style.backgroundColor = "#9783c9"
+            row.style.transition = "background-color 0.4s"
+        }
+     
+        
+       
     }   
    
+}
+
+function isChecked(id){
+    if(document.getElementById(id).getElementsByClassName('checked')[0].style.display === "block"){
+        return false;
+    } else{
+        return true;
+    }
 }
 
 
@@ -89,43 +113,126 @@ function CancelPopup(str){
     
 }
 
-function EditPopup(id){    
+function EditPopup(id){       
+    let row;
     let input = edit_popup.getElementsByTagName('input')[0];
 
-    let row = document.getElementById(id);    
-    let row_color = row.style.backgroundColor;
-    current_row_edit = id;
+    if (row_edit === ''){
+        row_edit = id;         
+
+        row = document.getElementById(id);           
     
-    create_popup.style.display = "none";
-    edit_popup.style.display = "flex";
-    row.style.backgroundColor = '#f28574'
+        
+        create_popup.style.display = "none";
+        edit_popup.style.display = "flex";
+        row.style.backgroundColor = '#f28574'
 
-   
-    input.value = row.getElementsByClassName('task')[0].textContent;
-
-    edit_popup.getElementsByClassName('btn')[0].onclick = function (){     
-        UpdateRow(id, input.value);
-        row.style.backgroundColor = row_color;
-        row.style.transition = "background-color 0.4s"
-        CancelPopup('edit-popup') 
-    };
     
-    //'x' button
-    edit_popup.getElementsByTagName('img')[0].onclick = function () {
-        CancelPopup('edit-popup')
-        row.style.backgroundColor = row_color;
-        row.style.transition = "background-color 0.4s"
-    }
+        input.value = row.getElementsByClassName('task')[0].textContent;
 
-    input.addEventListener('keyup', function(e){
-        let key = e.which || e.keyCode;
-        if (key == 13){            
-            UpdateRow(id, input.value)
-            row.style.backgroundColor = row_color;
+        edit_popup.getElementsByClassName('btn')[0].onclick = function (){     
+            UpdateRow(id, input.value);
+
+            if(isChecked(id)){
+                row.style.backgroundColor = '#c3aaf0'
+                row.style.transition = "background-color 0.4s";
+            } else {
+                row.style.backgroundColor = '#9783c9'
+                row.style.transition = "background-color 0.4s";
+            }          
             
-        } 
-    })
 
+            row_edit = '';
+            CancelPopup('edit-popup') 
+        };
+        
+        //'x' button
+        edit_popup.getElementsByTagName('img')[0].onclick = function () {
+            CancelPopup('edit-popup')
+
+            if(isChecked(id)){
+                row.style.backgroundColor = '#c3aaf0'
+                row.style.transition = "background-color 0.4s";
+            } else {
+                row.style.backgroundColor = '#9783c9'
+                row.style.transition = "background-color 0.4s";
+            }            
+            
+            row_edit = '';
+        }
+
+        /*input.addEventListener('keyup', function(e){
+            let key = e.which || e.keyCode;
+            if (key == 13){            
+                UpdateRow(id, input.value)
+                row.style.backgroundColor = row_color;
+                
+            } 
+        })*/
+
+
+    } else {     
+
+        row = document.getElementById(row_edit);    
+        row_edit = id;     
+        console.log(row.getElementsByClassName('task')[0].textContent, id)
+
+        //create_popup.style.display = "none";
+        //edit_popup.style.display = "flex";
+        if(isChecked(row_edit)){
+            row.style.backgroundColor = '#9783c9'
+        } else {
+            row.style.backgroundColor = '#c3aaf0'
+        }
+
+        row = document.getElementById(id); 
+        row.style.backgroundColor = '#f28574'
+
+    
+        input.value = row.getElementsByClassName('task')[0].textContent;
+
+        edit_popup.getElementsByClassName('btn')[0].onclick = function (){     
+            UpdateRow(id, input.value);
+           
+            if(isChecked(id)){
+                row.style.backgroundColor = '#c3aaf0'
+                row.style.transition = "background-color 0.4s";
+            } else {
+                row.style.backgroundColor = '#9783c9'
+                row.style.transition = "background-color 0.4s";
+            }    
+            
+
+            row_edit = '';
+            CancelPopup('edit-popup') 
+        };
+        
+        //'x' button
+        edit_popup.getElementsByTagName('img')[0].onclick = function () {
+            CancelPopup('edit-popup')
+            if(isChecked(id)){
+                row.style.backgroundColor = '#c3aaf0'
+                row.style.transition = "background-color 0.4s";
+            } else {
+                row.style.backgroundColor = '#9783c9'
+                row.style.transition = "background-color 0.4s";
+            }         
+            row_edit = '';
+        }
+
+        /*input.addEventListener('keyup', function(e){
+            let key = e.which || e.keyCode;
+            if (key == 13){            
+                UpdateRow(id, input.value)
+                row.style.backgroundColor = row_color;
+                
+            } 
+        })*/
+
+        
+    }
+   
+  
 
    
 }
