@@ -117,6 +117,24 @@ function EditPopup(id){
     let row;
     let input = edit_popup.getElementsByTagName('input')[0];
 
+    let finish = () => {
+        UpdateRow(id, input.value);
+
+        console.log(isChecked(id).toString())
+
+        if(isChecked(id)){
+            row.style.backgroundColor = '#c3aaf0'
+            row.style.transition = "background-color 0.4s";
+        } else {
+            row.style.backgroundColor = '#9783c9'
+            row.style.transition = "background-color 0.4s";
+        }          
+        
+
+        row_edit = '';
+        CancelPopup('edit-popup') 
+    }
+
     if (row_edit === ''){
         row_edit = id;         
 
@@ -131,34 +149,12 @@ function EditPopup(id){
         input.value = row.getElementsByClassName('task')[0].textContent;
 
         edit_popup.getElementsByClassName('btn')[0].onclick = function (){     
-            UpdateRow(id, input.value);
-
-            if(isChecked(id)){
-                row.style.backgroundColor = '#c3aaf0'
-                row.style.transition = "background-color 0.4s";
-            } else {
-                row.style.backgroundColor = '#9783c9'
-                row.style.transition = "background-color 0.4s";
-            }          
-            
-
-            row_edit = '';
-            CancelPopup('edit-popup') 
+           finish()
         };
         
         //'x' button
         edit_popup.getElementsByTagName('img')[0].onclick = function () {
-            CancelPopup('edit-popup')
-
-            if(isChecked(id)){
-                row.style.backgroundColor = '#c3aaf0'
-                row.style.transition = "background-color 0.4s";
-            } else {
-                row.style.backgroundColor = '#9783c9'
-                row.style.transition = "background-color 0.4s";
-            }            
-            
-            row_edit = '';
+            finish()
         }
 
         /*input.addEventListener('keyup', function(e){
@@ -192,32 +188,12 @@ function EditPopup(id){
         input.value = row.getElementsByClassName('task')[0].textContent;
 
         edit_popup.getElementsByClassName('btn')[0].onclick = function (){     
-            UpdateRow(id, input.value);
-           
-            if(isChecked(id)){
-                row.style.backgroundColor = '#c3aaf0'
-                row.style.transition = "background-color 0.4s";
-            } else {
-                row.style.backgroundColor = '#9783c9'
-                row.style.transition = "background-color 0.4s";
-            }    
-            
-
-            row_edit = '';
-            CancelPopup('edit-popup') 
+            finish()
         };
         
         //'x' button
         edit_popup.getElementsByTagName('img')[0].onclick = function () {
-            CancelPopup('edit-popup')
-            if(isChecked(id)){
-                row.style.backgroundColor = '#c3aaf0'
-                row.style.transition = "background-color 0.4s";
-            } else {
-                row.style.backgroundColor = '#9783c9'
-                row.style.transition = "background-color 0.4s";
-            }         
-            row_edit = '';
+            finish()
         }
 
         /*input.addEventListener('keyup', function(e){
