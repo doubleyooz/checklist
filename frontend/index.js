@@ -46,8 +46,8 @@ function createRow(){
 
 function UpdateRow(id, text){
     document.getElementById(id).getElementsByClassName('task')[0].textContent = text;
-    let print = document.getElementById(id).getElementsByClassName('task')[0].textContent;
-    console.log(print, ' ', id )
+    //let print = document.getElementById(id).getElementsByClassName('task')[0].textContent;
+    console.log(id )
     
 
 }
@@ -100,9 +100,9 @@ function check(id){
 
 function isChecked(id){
     if(document.getElementById(id).getElementsByClassName('checked')[0].style.display === "block"){
-        return false;
-    } else{
         return true;
+    } else{
+        return false;
     }
 }
 
@@ -114,23 +114,23 @@ function CancelPopup(str){
 }
 
 function EditPopup(id){       
+    
     let row;
     let input = edit_popup.getElementsByTagName('input')[0];
 
     let finish = () => {
         UpdateRow(id, input.value);
 
-        console.log(isChecked(id).toString())
-
+        console.log({row_edit: row_edit})
+       
         if(isChecked(id)){
-            row.style.backgroundColor = '#c3aaf0'
+            row.style.backgroundColor = '#9783c9'
             row.style.transition = "background-color 0.4s";
         } else {
-            row.style.backgroundColor = '#9783c9'
+            row.style.backgroundColor = '#c3aaf0'
             row.style.transition = "background-color 0.4s";
         }          
         
-
         row_edit = '';
         CancelPopup('edit-popup') 
     }
@@ -168,10 +168,10 @@ function EditPopup(id){
 
 
     } else {     
-
+        console.log({row_edit: row_edit, id: id})
         row = document.getElementById(row_edit);    
-        row_edit = id;     
-        console.log(row.getElementsByClassName('task')[0].textContent, id)
+             
+       
 
         //create_popup.style.display = "none";
         //edit_popup.style.display = "flex";
@@ -180,7 +180,7 @@ function EditPopup(id){
         } else {
             row.style.backgroundColor = '#c3aaf0'
         }
-
+        row_edit = id;
         row = document.getElementById(id); 
         row.style.backgroundColor = '#f28574'
 
@@ -225,7 +225,7 @@ function DisplayPopup(str, id){
         
     } else if(str === 'edit-popup'){       
         if(id !== null){
-           
+            console.log(isChecked(id).toString())
             EditPopup(id);           
           
           
