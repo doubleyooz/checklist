@@ -1,0 +1,96 @@
+.popup-container {
+  width: 350px;
+
+  padding: 10px;
+  background-color: #ffffff;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  z-index: 300;
+
+  flex-direction: column;
+
+  padding: 8px;
+  border-radius: 8px;
+
+  font-family: sans-serif;
+}
+
+.popup-container .header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  margin-bottom: 28px;
+}
+
+.popup-container .header span {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.popup-container .header img {
+  width: 20px;
+  height: 20px;
+
+  border-radius: 50%;
+
+  transition: all ease-in-out 0.5s;
+  cursor: pointer;
+}
+
+.popup-container .header img:hover {
+  background-color: #ec4e4e;
+}
+
+.popup-container .form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.popup-container .form span { 
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.popup-container .form input[type="text"] {
+  width: 100%;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  margin: 8px 0;
+  outline: none;
+  padding: 8px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  color: rgb(80, 82, 83)
+}
+
+.popup-container .form input[type="text"]:focus {
+    border: 1px solid #000;
+    color: rgb(57, 64, 70)
+}
+
+.popup-container .btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+
+  opacity: 0.8;
+
+  font-size: 20px;
+}
+
+.popup-container .btn:hover {
+  opacity: 1;
+}

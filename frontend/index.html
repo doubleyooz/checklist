@@ -1,54 +1,30 @@
 <html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Toodo</title>
-    <link rel="stylesheet" href="styles.css"/>
+  <meta charset="UTF-8" />
+  <title>Toodo</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="components/popup.css" />
 </head>
+
 <body>
+  <div class="content">
+    <div class="form-placeholder" />
 
-    <div class="content">
-        <div class="form-popup">
-            <div class='form-header'>                
-                <span>Create a new task</span>
-                <img src="./assets/close-icon.png" alt="" onclick="CancelPopup('form-popup')">
-            </div>
-           
-            <div class='task-title'>
-                <span> Title: </span>
-                <input type="text" placeholder="Your task" name="task" required>
-            </div>
-           
-            <button type="submit" class="btn" onclick="createRow()">Create</button>
-            
-        </div>
-    
-        <div class="table">
-            <div class="header">
-                <div class='title'>To-do list</div>
-                <img src="./assets/add-icon.png" alt="" onclick="DisplayPopup('form-popup', null)">
-            </div>
-            <div class="rows">
-    
-            </div>            
-    
-        </div>
+    <div class="table">
+      <div class="header">
+        <div class="title">To-do list</div>
+        <img src="./assets/add-icon.png" alt=""
+          onclick="displayPopup('form-placeholder', {
+            title: 'Create a new task', label: 'Title', inputPlaceholder: 'Your task', btnText: 'Create', onClick: 'createRow'})" />
+      </div>
+      <div class="rows"></div>
+    </div>
 
-        <div class="edit-popup">
-            <div class='form-header'>                
-                <span>Update Task</span>
-                <img src="./assets/close-icon.png" alt="" ">
-            </div>
-           
-            <div class='task-title'>
-                <span> New Title: </span>
-                <input type="text" placeholder="Your task" name="task" required>
-            </div>
-           
-            <button type="submit" class="btn">Edit</button>
-            
-        </div>
-    </div>    
-   
+  </div>
 </body>
-<script src='index.js'></script>
+<script src="index.js"></script>
+<script src="components/popup.js"></script>
+<script src="./utils/element.util.js"></script>
+
 </html>
