@@ -1,3 +1,15 @@
+:root {
+  --primary: #9783c9;
+  --secondary: #c3aaf0;
+  --tertiary: #8d72ba;
+  --text: #eeeeee;
+  --header: #493c6e;
+  --white: #ffffff;
+  --warning: #db5540;
+  --error: #ec4e4e;
+  --success: #4caf50;
+}
+
 body {
   background-color: #c7c8f2;
 }
@@ -10,7 +22,7 @@ body {
 }
 
 .table .header {
-  background-color: #493c6e;
+  background-color: var(--header);
   width: 400px;
   height: 35px;
 
@@ -25,7 +37,7 @@ body {
 }
 
 .table .header .title {
-  color: #eeeeee;
+  color: var(--text);
   font-size: 20px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   margin-right: 30px;
@@ -38,6 +50,7 @@ body {
   position: absolute;
   right: 10;
   opacity: 0.9;
+  cursor: pointer;
 
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -53,7 +66,7 @@ body {
 .table .row {
   width: 400px;
   height: 30px;
-  background-color: #c3aaf0;
+  background-color: var(--secondary);
 
   display: flex;
   flex-direction: row;
@@ -69,10 +82,11 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .table .row .button:hover {
-  background-color: #8d72ba;
+  background-color: var(--tertiary);
 }
 
 .table .row .button-selected {
@@ -85,7 +99,7 @@ body {
 }
 
 .table .row .button-selected:hover {
-  background-color: #db5540;
+  background-color: var(--warning);
   filter: invert(44%) sepia(10%) saturate(3442%) hue-rotate(320deg)
     brightness(99%) contrast(104%);
 }

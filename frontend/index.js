@@ -1,7 +1,5 @@
 let edit_popup = document.getElementsByClassName("edit-popup")[0];
 
-var selectedRow = "";
-
 function createRow() {
   const value = document
     .getElementsByClassName("form")[0]
@@ -13,11 +11,6 @@ function createRow() {
   div.className = "row";
 
   div.id = divId;
-  //var data = {text: value, id: divId};
-
-  var data = [value.toString(), divId];
-
-  data = JSON.stringify(data);
 
   div.innerHTML = `
         
@@ -27,7 +20,7 @@ function createRow() {
         <div class="task">${value}</div>
         
         <div class="button edit">
-            <img src="./assets/edit-icon.png" alt="" onclick="editRow(${divId})" ">
+            <img src="./assets/edit-icon.png" alt="" onclick="displayUpdatePopup(${divId})" ">
         </div>
         <div class="button trash">
             <img src="./assets/trash-icon.png" alt="" onclick="deleteElement('rows', ${divId})">
@@ -38,18 +31,11 @@ function createRow() {
   document.getElementsByClassName("rows")[0].appendChild(div);
 }
 
-function updateRow(id, text) {
-  document.getElementById(id).getElementsByClassName("task")[0].textContent =
-    text;
-  //let print = document.getElementById(id).getElementsByClassName('task')[0].textContent;
-  console.log(id);
-}
-
 function check(id) {
-  var row = document.getElementById(id);
-  var check = row.getElementsByClassName("check")[0];
-  var checked = row.getElementsByClassName("checked")[0];
-  console.log({ id, selectedRow });
+  const row = document.getElementById(id);
+  const check = row.getElementsByClassName("check")[0];
+  const checked = row.getElementsByClassName("checked")[0];
+
   if (id === selectedRow) return;
   if (check.style.display === "none") {
     check.style.display = "block";
@@ -70,92 +56,51 @@ function check(id) {
 }
 
 function isChecked(id) {
-  if (
+  return (
     document.getElementById(id).getElementsByClassName("checked")[0].style
       .display === "block"
-  ) {
-    return true;
-  } else {
-    return false;
-  }
+  );
 }
 
-function cancelPopup(str) {
-  document.getElementsByClassName(str)[0].style.display = "none";
+function displayUpdatePopup(id) {
+  if (selectedRow) return;
+  selectedRow = id;
+  const row = document.getElementById(id);
+  row.style.backgroundColor = "#f28574";
+  const value = row.getElementsByClassName("task")[0].textContent;
+  const rowColor = isChecked(selectedRow) ? "#9783c9" : "#c3aaf0";
+ 
+  displayPopup("form-placeholder", {
+    title: "Update task",
+    label: "New title",
+    inputPlaceholder: `${value}`,
+    btnText: "Edit",
+    onClick: `editRow(${id})`,
+  });
+  const popup = document.getElementsByClassName("popup-container")[0];
+
+  const closeBtn = popup.getElementsByClassName("close-btn")[0];
+
+  const originalCloseBtnOnClick = closeBtn.onclick ? closeBtn.onclick : {};
+
+  const closeFunction = () => {
+    console.log("closeFunction");
+    originalCloseBtnOnClick();
+    row.style.backgroundColor = rowColor;
+    selectedRow = "";
+    return;
+  };
+  closeBtn.onclick = closeFunction;
 }
 
 function editRow(id) {
-  if (selectedRow) return;
-  selectedRow = id;
-  let row;
-  row = document.getElementById(id);
-  row.style.backgroundColor = "#f28574";
-
-  //displayPopup('form-placeholder', {   title: 'Update task', label: 'New title', inputPlaceholder: '${value}', btnText: 'Edit', onClick: 'updateRow(${divId})'})
   const popup = document.getElementsByClassName("popup-container")[0];
-  const value = popup
-    .getElementsByTagName("input")[0].value;
+  const input = popup.getElementsByTagName("input")[0];
 
-  updateRow(id, value);
+  document.getElementById(id).getElementsByClassName("task")[0].textContent =
+    input.value;
+  const row = document.getElementById(id);
 
-  if (isChecked(id)) {
-    row.style.backgroundColor = "#9783c9";
-    row.style.transition = "background-color 0.4s";
-  } else {
-    row.style.backgroundColor = "#c3aaf0";
-    row.style.transition = "background-color 0.4s";
-  }
-
-  let finish = () => {
-    selectedRow = "";
-    cancelPopup("edit-popup");
-  };
-
-  if (selectedRow === "") {
-    selectedRow = id;
-
-    input.value = row.getElementsByClassName("task")[0].textContent;
-
-    form.getElementsByClassName("btn")[0].onclick = function () {
-      finish();
-    };
-
-    //'x' button
-    form.getElementsByTagName("img")[0].onclick = function () {
-      finish();
-    };
-
-    /*input.addEventListener('keyup', function(e){
-            let key = e.which || e.keyCode;
-            if (key == 13){            
-                updateRow(id, input.value)
-                row.style.backgroundColor = row_color;
-                
-            } 
-        })*/
-  } else {
-    console.log({ selectedRow: selectedRow, id: id });
-    row = document.getElementById(selectedRow);
-
-    //create_popup.style.display = "none";
-    //edit_popup.style.display = "flex";
-    if (isChecked(selectedRow)) {
-      row.style.backgroundColor = "#9783c9";
-    } else {
-      row.style.backgroundColor = "#c3aaf0";
-    }
-    selectedRow = id;
-    row = document.getElementById(id);
-    row.style.backgroundColor = "#f28574";
-
-    input.value = row.getElementsByClassName("task")[0].textContent;
-
-    popup.getElementsByClassName("btn")[0].onclick = function () {
-      finish();
-    };
-
-    popup.getElementsByTagName("img")[0].onclick = function () {
-      finish();
-    };
-  }
+  row.style.backgroundColor = isChecked(selectedRow) ? "#9783c9" : "#c3aaf0";
+  selectedRow = "";
 }
